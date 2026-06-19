@@ -1,4 +1,20 @@
 package campusmatch.enums;
 
-public class Periodo {
+/**
+ * The enum Periodo.
+ */
+public enum Periodo {
+    /**
+     * Primeiro periodo.
+     */
+    Primeiro,
+    /**
+     * Segundo periodo.
+     */
+    Segundo,
+    /**
+     * Terceiro periodo.
+     */
+    Terceiro
 }
+
