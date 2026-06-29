@@ -7,6 +7,8 @@ public class Disciplina {
     private String codigo;
     private String nome;
     private int cargaHoraria;
+    private String tagsDeConhecimento;
+    
 
     /**
      * Instantiates a new Disciplina.
@@ -39,11 +41,7 @@ public class Disciplina {
         return nome;
     }
 
-    /**
-     * Gets carga horaria.
-     *
-     * @return the carga horaria
-     */
+    
     public int getCargaHoraria() {
         return cargaHoraria;
     }

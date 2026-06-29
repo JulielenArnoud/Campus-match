@@ -2,50 +2,42 @@ package campusmatch.dominio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import campusmatch.enums.DiasDaSemana;
+import campusmatch.enums.Disciplinas;
+import campusmatch.enums.Periodo;
 
 /**
  * The type Professor.
  */
 public class Professor {
     private String nome;
-    private List<String> competencias;
-    private List<Horario> disponibilidade;
+    private String matricula;
+    private List<Disciplinas> competencias;
+    private Map<DiasDaSemana, List<Periodo> > disponibilidade;
 
-    /**
-     * Instantiates a new Professor.
-     *
-     * @param nome the nome
-     */
-    public Professor(String nome) {
+
+    
+    public Professor(String nome, String matricula, List<Disciplinas>competencias, Map<DiasDaSemana, List<Periodo>> disponibilidade) {
         this.nome = nome;
-        this.competencias = new ArrayList<>();
-        this.disponibilidade = new ArrayList<>();
+        this.matricula = matricula;
+        this.competencias = competencias;
+        this.disponibilidade = disponibilidade;
     }
 
-    /**
-     * Gets nome.
-     *
-     * @return the nome
-     */
+    
     public String getNome() {
         return nome;
     }
 
-    /**
-     * Gets competencias.
-     *
-     * @return the competencias
-     */
-    public List<String> getCompetencias() {
+
+    public List<Disciplinas> getCompetencias() {
         return competencias;
     }
 
-    /**
-     * Gets disponibilidade.
-     *
-     * @return the disponibilidade
-     */
-    public List<Horario> getDisponibilidade() {
+   
+    public Map<DiasDaSemana, List<Periodo>> getDisponibilidade() {
         return disponibilidade;
     }
 }
