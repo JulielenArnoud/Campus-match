@@ -1,11 +1,9 @@
 package campusmatch.dominio;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import campusmatch.enums.DiasDaSemana;
-import campusmatch.enums.Disciplinas;
+import campusmatch.enums.DiaDaSemana;
 import campusmatch.enums.Periodo;
 
 /**
@@ -14,12 +12,12 @@ import campusmatch.enums.Periodo;
 public class Professor {
     private String nome;
     private String matricula;
-    private List<Disciplinas> competencias;
-    private Map<DiasDaSemana, List<Periodo> > disponibilidade;
+    private List<Disciplina> competencias;
+    private Map<DiaDaSemana, List<Periodo> > disponibilidade;
 
 
     
-    public Professor(String nome, String matricula, List<Disciplinas>competencias, Map<DiasDaSemana, List<Periodo>> disponibilidade) {
+    public Professor(String nome, String matricula, List<Disciplina>competencias, Map<DiaDaSemana, List<Periodo>> disponibilidade) {
         this.nome = nome;
         this.matricula = matricula;
         this.competencias = competencias;
@@ -32,12 +30,12 @@ public class Professor {
     }
 
 
-    public List<Disciplinas> getCompetencias() {
+    public List<Disciplina> getCompetencias() {
         return competencias;
     }
 
    
-    public Map<DiasDaSemana, List<Periodo>> getDisponibilidade() {
+    public Map<DiaDaSemana, List<Periodo>> getDisponibilidade() {
         return disponibilidade;
     }
 }

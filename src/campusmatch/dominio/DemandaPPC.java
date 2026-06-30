@@ -1,14 +1,15 @@
 package campusmatch.dominio;
 
-import campusmatch.enums.DiasDaSemana;
+import campusmatch.enums.DiaDaSemana;
+import campusmatch.enums.Periodo;
 
 public class DemandaPPC{
    private String nomeDaDisciplina;
-   private Disciplinas competenciasExigidas;
-   private DiasDaSemana diaDaSemana;
+   private Disciplina competenciasExigidas;
+   private DiaDaSemana diaDaSemana;
    private Periodo periodo;
 
-   public DemandaPPC(String nomeDaDisciplina, Disciplinas competenciasExigidas, DiasDaSemana diaDaSemana, Periodo periodo){
+   public DemandaPPC(String nomeDaDisciplina, Disciplina competenciasExigidas, DiaDaSemana diaDaSemana, Periodo periodo){
        this.nomeDaDisciplina = nomeDaDisciplina;
        this.competenciasExigidas = competenciasExigidas;
        this.diaDaSemana = diaDaSemana;
@@ -16,10 +17,10 @@ public class DemandaPPC{
 
    }
 
-   public Disciplinas getCompetenciasExigidas() {
+   public Disciplina getCompetenciasExigidas() {
        return competenciasExigidas;
    }
-   public DiasDaSemana getDiaDaSemana(){
+   public DiaDaSemana getDiaDaSemana(){
         return diaDaSemana;
    }
    public Periodo getPeriodo(){

@@ -1,14 +1,14 @@
 package campusmatch.dominio;
 
-import campusmatch.enums.DiasDaSemana;
+import campusmatch.enums.DiaDaSemana;
 import campusmatch.enums.Periodo;
 
 
 public class Horario {
-    private final DiasDaSemana dia;
+    private final DiaDaSemana dia;
     private final Periodo periodo;
 
-    public Horario(DiasDaSemana dia, Periodo periodo) {
+    public Horario(DiaDaSemana dia, Periodo periodo) {
         this.dia = dia;
         this.periodo = periodo;
     }
@@ -18,7 +18,7 @@ public class Horario {
      *
      * @return the dia
      */
-    public DiasDaSemana getDia() {
+    public DiaDaSemana getDia() {
         return dia;
     }
 

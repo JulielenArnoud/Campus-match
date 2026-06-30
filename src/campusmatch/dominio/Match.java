@@ -1,7 +1,10 @@
 package campusmatch.dominio;
 
+import campusmatch.enums.DiaDaSemana;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import campusmatch.enums.Periodo;
 
 //imutabilidade: o stream não altera a lista original de corpoDocente, ele cria uma nova
 //com somente os habilitados
@@ -23,7 +26,7 @@ public class Match{
     }
 
     //metodo auxiliar para checar o mapa de agenda do professor(pode ser private)
-    private boolean verificarDisponibilidade(Professor professor, DiasDaSemana dia, Periodo periodo){
+    private boolean verificarDisponibilidade(Professor professor, DiaDaSemana dia, Periodo periodo){
         List<Periodo> periodosLivresNoDia = professor.getDisponibilidade().get(dia);
         return periodosLivresNoDia != null && periodosLivresNoDia.contains(periodo);
     }
