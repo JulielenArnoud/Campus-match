@@ -1,27 +1,21 @@
 package campusmatch.dominio;
 
-import java.util.Collections;
+import campusmatch.enums.AreaCompetencia;
 import java.util.Objects;
 import java.util.Set;
 
 /**
- * The type Disciplina.
+ * Representa uma Disciplina na grade curricular.
  */
 public class Disciplina {
     private final String codigo;
     private final String nome;
     private final int cargaHoraria;
-    private final Set<String> tagsDeConhecimento;
+    
+    // Trocado Set<String> por Set<AreaCompetencia> para garantir o match exato sem erros de digitação
+    private final Set<AreaCompetencia> competenciasExigidas;
 
-    /**
-     * Instantiates a new Disciplina.
-     *
-     * @param codigo             the codigo
-     * @param nome               the nome
-     * @param cargaHoraria       the carga horaria
-     * @param tagsDeConhecimento the tags de conhecimento
-     */
-    public Disciplina(String codigo, String nome, int cargaHoraria, Set<String> tagsDeConhecimento) {
+    public Disciplina(String codigo, String nome, int cargaHoraria, Set<AreaCompetencia> competenciasExigidas) {
         if (codigo == null || codigo.trim().isEmpty()) {
             throw new IllegalArgumentException("O código da disciplina não pode ser vazio.");
         }
@@ -31,50 +25,34 @@ public class Disciplina {
         if (cargaHoraria <= 0) {
             throw new IllegalArgumentException("A carga horária deve ser maior que zero.");
         }
-        if (tagsDeConhecimento == null || tagsDeConhecimento.isEmpty()) {
-            throw new IllegalArgumentException("A disciplina deve ter pelo menos uma tag de conhecimento.");
+        if (competenciasExigidas == null || competenciasExigidas.isEmpty()) {
+            throw new IllegalArgumentException("A disciplina deve ter pelo menos uma competência/tag de conhecimento.");
         }
 
-        this.codigo = codigo;
-        this.nome = nome;
+        this.codigo = codigo.trim();
+        this.nome = nome.trim();
         this.cargaHoraria = cargaHoraria;
-        this.tagsDeConhecimento = Set.copyOf(tagsDeConhecimento);
+        
+        // Set.copyOf já garante que a coleção original não seja alterada
+        // e retorna um Set imutável (Java 10+)
+        this.competenciasExigidas = Set.copyOf(competenciasExigidas);
     }
 
-    /**
-     * Gets codigo.
-     *
-     * @return the codigo
-     */
     public String getCodigo() {
         return codigo;
     }
 
-    /**
-     * Gets nome.
-     *
-     * @return the nome
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     * Gets carga horaria.
-     *
-     * @return the carga horaria
-     */
     public int getCargaHoraria() {
         return cargaHoraria;
     }
 
-    /**
-     * Gets tags de conhecimento.
-     *
-     * @return the tags de conhecimento
-     */
-    public Set<String> getTagsDeConhecimento() {
-        return Collections.unmodifiableSet(tagsDeConhecimento);
+    public Set<AreaCompetencia> getCompetenciasExigidas() {
+        // Como this.competenciasExigidas já é um Set.copyOf, podemos retornar direto
+        return competenciasExigidas;
     }
 
     @Override
