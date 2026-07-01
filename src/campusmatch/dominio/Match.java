@@ -25,9 +25,12 @@ public class Match{
 
     private List<DemandaPPC> demandasNaoAtendidas = new ArrayList<>();
 
-    public Match(List<Professor> professores, List<DemandaPPC> demandasppc) {
+    private List<InteresseAlunos> interessesAlunos = new ArrayList<>();
+
+    public Match(List<Professor> professores, List<DemandaPPC> demandasppc, List<InteresseAlunos> interessesAlunos) {
         this.professores = professores;
         this.demandasppc = demandasppc;
+        this.interessesAlunos = interessesAlunos;
     }
 
     /*
@@ -87,10 +90,21 @@ public class Match{
         score += professor.getCargaHorariaDisponivel();
         //Bonus: a demanda tem prioridade alta no ppc
         score += demanda.getPrioridade().getPeso()*10;
-
+        //BOnus: intersse dos alunos
+        Optional<InteresseAlunos> interesse = busacarInteresseDaDisciplina(demanda.getDisciplina());
+        if(interesse.isPresent()){
+            InteresseAlunos dadosAlunos = interesse.get();
+            score += dadosAlunos.getQuantidadeInteressados();
+            score += dadosAlunos.getPrioridade().getPeso() * 10;
+        }
         return score;
-
     }   
+
+    private Optional<InteresseAlunos> busacarInteresseDaDisciplina(Disciplina disciplina){
+        return interesseDosAlunos.stream()
+                .filter(i-> i.getDisciplina().equals(disciplina))            
+                .findFirst();
+    }
 
     /*
         ETAPA 3: Escolha do melhor candidato
