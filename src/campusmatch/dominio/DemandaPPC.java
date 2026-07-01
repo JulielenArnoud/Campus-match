@@ -5,17 +5,14 @@ import campusmatch.enums.Periodo;
 
 public class DemandaPPC {
     
-    // 1. Mudança principal: Em vez de guardar o nome e a competência soltos, 
-    // guardamos o objeto Disciplina inteiro.
-    private Disciplina disciplina;  
-    private DiaDaSemana diaDaSemana;
-    private Periodo periodo;
-    private enum prioridade{ALTA, MEDIA, BAIXA};
 
-    public DemandaPPC(Disciplina disciplina, DiaDaSemana diaDaSemana, Periodo periodo, prioridade prioridade) {
+    private Disciplina disciplina;  
+    private Horario horario;
+    private Prioridade prioridade; 
+
+    public DemandaPPC(Disciplina disciplina, Horario horario, prioridade prioridade) {
         this.disciplina = disciplina;
-        this.diaDaSemana = diaDaSemana;
-        this.periodo = periodo;
+        this.horario = horario;
         this.prioridade = prioridade;
     }
 
@@ -24,12 +21,13 @@ public class DemandaPPC {
         return disciplina; 
     }
     
-    public DiaDaSemana getDiaDaSemana() { 
-        return diaDaSemana; 
+    public Horario getHorario() { 
+        return horario; 
     }
-    
-    public Periodo getPeriodo() { 
-        return periodo; 
+    //auxiliar para o motor de match, para facilitar a leitura do código
+    public int calcularPeso(int multiplicador){
+        return this.prioridade*multiplicador;
+
     }
     
     // Um método de conveniência opcional para facilitar a leitura no código

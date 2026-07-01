@@ -65,17 +65,16 @@ public class Match{
     public List<Professor> buscarCandidatos(List<Professor> corpoDocente, DemandaPPC demanda){
         return corpoDocente.stream()
                 //Regra 1: o professor deve ter a competência exigida pela demanda
-                .filter(professor -> professor.getCompetencias().contains(demanda.getCompetenciasExigidas()))
+                .filter(professor -> professor.getCompetencias().contains(demanda.getDisciplina()))
                 //Regra 2: o professor está disponivel naquele dia e periodo
-                .filter(professor -> verificarDisponibilidade(professor, demanda.getDiaDaSemana(), demanda.getPeriodo()))
+                .filter(professor -> verificarDisponibilidade(professor, demanda.getHorario()))
                 //coleta os aprovados em uma nova lista
                 .collect(Collectors.toList());    
     }
 
     //metodo auxiliar para checar o mapa de agenda do professor(pode ser private)
-    private boolean verificarDisponibilidade(Professor professor, DiaDaSemana dia, Periodo periodo){
-        List<Periodo> periodosLivresNoDia = professor.getDisponibilidade().get(dia);
-        return periodosLivresNoDia != null && periodosLivresNoDia.contains(periodo);
+    private boolean verificarDisponibilidade(Professor professor, Horario horario){
+        return professor.isDisponivel(horario);
     }
 
 
@@ -87,7 +86,7 @@ public class Match{
         //Bonus: professor tem muita carga horaria sobrando
         score += professor.getCargaHorariaDisponivel();
         //Bonus: a demanda tem prioridade alta no ppc
-        score += demanda.getPrioridade()*10;
+        score += demanda.getPrioridade().getPeso()*10;
 
         return score;
 
@@ -111,8 +110,8 @@ public class Match{
         gradeCurricular.adicionarAlocacao(alocacao);
         
         //atualiza o estado do professor
-        escolhido.removerDisponibilidade(demanda.getDiaDaSemana(), demanda.getPeriodo());
-        //escolhido.descontarCargaHoraria(demanda.getDisciplina().getCargaHoraria());
+        escolhido.removerDisponibilidade(demanda.getHorario());
+        escolhido.descontarCargaHoraria(demanda.getDisciplina().getCargaHoraria());
     }
 
     /*
@@ -128,7 +127,7 @@ public class Match{
             System.out.println("[ALERTA] As seguintes disciplinas ficaram sem professor:");
             for (DemandaPPC pendente : demandasNaoAtendidas) {
                 System.out.println("- " + pendente.getDisciplina().getNome() + 
-                                   " (" + pendente.getDiaDaSemana() + " " + pendente.getPeriodo() + ")");
+                                   " (" + pendente.getHorario().toString() + ")");
             }
         }
         
