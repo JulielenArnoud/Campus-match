@@ -7,15 +7,16 @@ public class DemandaPPC {
     
     // 1. Mudança principal: Em vez de guardar o nome e a competência soltos, 
     // guardamos o objeto Disciplina inteiro.
-    private Disciplina disciplina;
-    
+    private Disciplina disciplina;  
     private DiaDaSemana diaDaSemana;
     private Periodo periodo;
+    private enum prioridade{ALTA, MEDIA, BAIXA};
 
-    public DemandaPPC(Disciplina disciplina, DiaDaSemana diaDaSemana, Periodo periodo) {
+    public DemandaPPC(Disciplina disciplina, DiaDaSemana diaDaSemana, Periodo periodo, prioridade prioridade) {
         this.disciplina = disciplina;
         this.diaDaSemana = diaDaSemana;
         this.periodo = periodo;
+        this.prioridade = prioridade;
     }
 
     // Getters para o Motor de Match utilizar

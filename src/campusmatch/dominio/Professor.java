@@ -23,7 +23,21 @@ public class Professor {
         this.competencias = competencias;
         this.disponibilidade = disponibilidade;
     }
+    // recebe todos periodos do dia, se existe remove o perido, se nao existe periodos remove dia
+    public void removerDisponibilidade(diaDaSemana dia, Periodo periodo) {
+        List<Periodo> periodosNoDia = disponibilidade.get(dia);
+        if (periodosNoDia != null) {
+            periodosNoDia.remove(periodo);
+            if (periodosNoDia.isEmpty()) {
+                disponibilidade.remove(dia);
+            }
+        }
 
+    }
+
+    public void descontarCargaHoraria(){
+        
+    }
     
     public String getNome() {
         return nome;
