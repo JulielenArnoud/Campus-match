@@ -1,62 +1,78 @@
 package campusmatch.dominio;
 
-import java.util.List;
-import java.util.Map;
+import campusmatch.enums.AreaCompetencia;
 import java.util.HashSet;
-
-
-import campusmatch.enums.DiaDaSemana;
-import campusmatch.enums.Periodo;
+import java.util.Set;
 
 /**
- * The type Professor.
+ * Representa um professor: suas competências, sua disponibilidade de
+ * horários e sua carga horária ainda disponível para novas alocações.
  */
 public class Professor {
-    private String nome;
-    private String matricula;
-    private List<Disciplina> competencias;
-    private Set<Horario> disponibilidade;
-    //private Map<DiaDaSemana, List<Periodo> > disponibilidade;
-    private int cargaHorariaDisponivel; 
+    private final String nome;
+    private final String matricula;
+    private final Set<AreaCompetencia> competencias;
+    private final Set<Horario> disponibilidade;
+    private int cargaHorariaDisponivel;
 
-    
-    public Professor(String nome, String matricula, List<Disciplina>competencias, Set<Horario> disponibilidade, int cargaHorariaDisponivel) {
+    public Professor(String nome, String matricula, Set<AreaCompetencia> competencias,
+                     Set<Horario> disponibilidade, int cargaHorariaDisponivel) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome do professor não pode ser vazio.");
+        }
+        if (competencias == null || competencias.isEmpty()) {
+            throw new IllegalArgumentException("O professor deve ter pelo menos uma competência.");
+        }
+        if (disponibilidade == null) {
+            throw new IllegalArgumentException("A disponibilidade do professor não pode ser nula.");
+        }
+        if (cargaHorariaDisponivel < 0) {
+            throw new IllegalArgumentException("A carga horária disponível não pode ser negativa.");
+        }
+
         this.nome = nome;
         this.matricula = matricula;
-        this.competencias = competencias;
-        this.disponibilidade = new HashSet<>(disponibilidade); // Cria uma cópia mutavel para que possamos remover 
+        this.competencias = Set.copyOf(competencias);
+        this.disponibilidade = new HashSet<>(disponibilidade); // cópia mutável, para permitir remover horários
         this.cargaHorariaDisponivel = cargaHorariaDisponivel;
     }
-    // recebe todos periodos do dia, se existe remove o perido, se nao existe periodos remove dia
+
+    /**
+     * Remove um horário da disponibilidade do professor (chamado após
+     * ele ser efetivamente alocado naquele horário).
+     */
     public void removerDisponibilidade(Horario horario) {
         this.disponibilidade.remove(horario);
     }
 
-    public boolean isDisponivel(Horario horario){
+    public boolean isDisponivel(Horario horario) {
         return disponibilidade.contains(horario);
     }
 
-    public void descontarCargaHoraria(int horas){
+    public void descontarCargaHoraria(int horas) {
+        if (horas < 0) {
+            throw new IllegalArgumentException("Não é possível descontar uma carga horária negativa.");
+        }
         this.cargaHorariaDisponivel -= horas;
     }
-    
-    
 
-    public void descontarCargaHoraria(){
-
-    }
-    
     public String getNome() {
         return nome;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
 
-    public List<Disciplina> getCompetencias() {
+    public Set<AreaCompetencia> getCompetencias() {
         return competencias;
     }
 
-   
-    public Map<DiaDaSemana, List<Periodo>> getDisponibilidade() {
+    public Set<Horario> getDisponibilidade() {
         return disponibilidade;
+    }
+
+    public int getCargaHorariaDisponivel() {
+        return cargaHorariaDisponivel;
     }
 }

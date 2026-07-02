@@ -3,15 +3,20 @@ package campusmatch.dominio;
 import campusmatch.enums.DiaDaSemana;
 import campusmatch.enums.Periodo;
 import campusmatch.enums.Turno;
+import java.util.Objects;
 
-
+/**
+ * Representa um horário: dia da semana, turno e período.
+ * Classe imutável — dois horários com o mesmo dia, turno e período
+ * são considerados o mesmo horário (equals/hashCode por valor).
+ */
 public class Horario {
     private final DiaDaSemana dia;
     private final Turno turno;
     private final Periodo periodo;
 
     public Horario(DiaDaSemana dia, Turno turno, Periodo periodo) {
-        if(dia == null || turno == null || periodo == null){
+        if (dia == null || turno == null || periodo == null) {
             throw new IllegalArgumentException("Dia, turno e período não podem ser nulos.");
         }
         this.dia = dia;
@@ -19,20 +24,10 @@ public class Horario {
         this.periodo = periodo;
     }
 
-    /**
-     * Gets dia.
-     *
-     * @return the dia
-     */
     public DiaDaSemana getDia() {
         return dia;
     }
 
-    /**
-     * Gets turno.
-     *
-     * @return the turno
-     */
     public Turno getTurno() {
         return turno;
     }
@@ -41,29 +36,24 @@ public class Horario {
         return periodo;
     }
 
-    //isso compara os horarios, 
+    // Compara dois horários pelo valor (dia + turno + período), não pela referência em memória
     @Override
-    public boolean equals(Object o){
-        if(this == o) return true; //se o objeto que chamou for igual ao objeto passado, retorna true
-        if(o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Horario horario = (Horario) o;
         return dia == horario.dia && turno == horario.turno && periodo == horario.periodo;
     }
 
-    //ele faz o hash code do objeto, que é um número inteiro que representa o objeto.
+    // Gera um código numérico consistente com o equals: horários "iguais" têm o mesmo hashCode
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(dia, turno, periodo);
     }
 
-    @Override 
-    public String toString(){
+    @Override
+    public String toString() {
         return dia + "-" + turno.getDescricao() + "-" + periodo;
     }
-
-
-
-
-
-}   
+}
