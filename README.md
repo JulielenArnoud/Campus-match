@@ -10,16 +10,22 @@ Nesta fase de ponto de verificação, o sistema foca na modelagem de domínio, r
 * Artur Antunes
 * Julielen Dorneles
 
-## Classes Principais e Responsabilidades
-Abaixo estão as classes centrais do domínio sugeridas para este ciclo, desenhadas para garantir encapsulamento e proteção de estado:
+ Como funciona o Motor de Match?
 
-* **`Professor`**: Responsável por armazenar o nome, as competências cadastradas e a disponibilidade de cada docente.
-* **`Disciplina`**: Mantém as informações da matéria, contendo código, nome e carga horária simplificada.
-* **`Horario`**: Representa os blocos de tempo (dia e período) e foi projetada para ser uma classe imutável.
-* **`Alocacao`**: Classe que vincula uma disciplina específica a um professor em um determinado horário.
-* **`Grade`**: Gerencia o conjunto de alocações geradas.
+A lógica central do sistema (Match.java) é dividida em 4 etapas rigorosas, utilizando programação funcional (Java Streams API):
 
-## Estrutura Inicial
-A arquitetura atual prioriza a separação de responsabilidades:
-* `app.dominio`: Contém as classes de modelo descritas acima.
-* `app.Main`: Ponto de entrada do sistema que carrega as coleções de dados em memória e demonstra a lógica básica.
+ Filtragem (Hard Constraints): Elimina candidatos que não possuem a Tag de Competência exigida pela disciplina ou que não tenham o horário livre na agenda.
+
+ Pontuação (Soft Constraints): Calcula um Score para os professores aprovados na etapa anterior. O algoritmo soma bônus baseados na folga de carga horária do professor, no nível de prioridade do PPC e no volume de interesse dos alunos.
+
+ Escolha e Efetivação: Seleciona o professor com a maior pontuação (abordagem Greedy). Realiza a alocação, consome o horário na agenda do professor e desconta sua carga horária disponível.
+
+ Validação: Analisa o resultado gerando um relatório que aponta o sucesso da grade ou emite alertas de "Conflito de Horário" para as disciplinas que ficaram sem professor.
+
+Próximos Passos
+
+[ ] Interface Gráfica (GUI): Desenvolver painéis de controle e sliders de peso utilizando JavaFX ou Swing (Padrão MVC).
+
+[ ] Banco de Dados: Conectar a aplicação a um SGBD relacional (ex: PostgreSQL) via JDBC ou JPA/Hibernate.
+
+[ ] Exportação de Grade: Gerar a grade final em formato PDF ou Excel.
