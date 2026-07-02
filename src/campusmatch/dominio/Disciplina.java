@@ -11,7 +11,6 @@ public class Disciplina {
     private final String codigo;
     private final String nome;
     private final int cargaHoraria;
-    
     // Trocado Set<String> por Set<AreaCompetencia> para garantir o match exato sem erros de digitação
     private final Set<AreaCompetencia> competenciasExigidas;
 
@@ -66,5 +65,10 @@ public class Disciplina {
     @Override
     public int hashCode() {
         return Objects.hash(codigo);
+    }
+
+    @Override
+    public String toString() {
+        return codigo + " - " + nome;
     }
 }

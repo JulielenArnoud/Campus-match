@@ -37,7 +37,6 @@ public class Grade {
             );
         }
 
-
         boolean turmaOcupada = alocacoes.stream()
                 .anyMatch(a -> a.getHorario().equals(alocacao.getHorario()));
 
