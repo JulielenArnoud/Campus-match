@@ -39,7 +39,7 @@ public class Match{
     public void executarMatch(){
         for(DemandaPPC demanda : demandasppc){
             // ETAPA 1: filtragem
-            List<Professor> candidatosValidos = buscarCandidatos(this.professores, demanda);>
+            List<Professor> candidatosValidos = buscarCandidatos(this.professores, demanda);
             
             if(candidatosValidos.isEmpty()){  // guarda as demandas que não foram atendidas
                 demandasNaoAtendidas.add(demanda);

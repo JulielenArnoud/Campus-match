@@ -1,4 +1,5 @@
 package campusmatch.dominio;
+import campusmatch.enums.Prioridade;
 
 import campusmatch.enums.DiaDaSemana;
 import campusmatch.enums.Periodo;
