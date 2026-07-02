@@ -16,14 +16,16 @@ public class Match {
     private final List<Professor> professores;
     private final List<DemandaPPC> demandasppc;
     private final List<InteresseAlunos> interessesAlunos;
+    private final CriterioDeMatch criterio;
 
     private final Grade gradeCurricular = new Grade();
     private final List<DemandaPPC> demandasNaoAtendidas = new ArrayList<>();
 
-    public Match(List<Professor> professores, List<DemandaPPC> demandasppc, List<InteresseAlunos> interessesAlunos) {
-        this.professores = professores;
+    public Match(List<Professor> professores, List<DemandaPPC> demandasppc,
+                 List<InteresseAlunos> interessesAlunos, CriterioDeMatch criterio) {        this.professores = professores;
         this.demandasppc = demandasppc;
         this.interessesAlunos = interessesAlunos;
+        this.criterio = criterio;
     }
 
     /**
