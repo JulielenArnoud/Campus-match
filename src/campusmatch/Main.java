@@ -2,7 +2,10 @@ package campusmatch;
 
 import campusmatch.dominio.*;
 import campusmatch.enums.*;
+import campusmatch.gui.GradeGUI;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +29,8 @@ public class Main {
         Disciplina engenhariaSoftware = new Disciplina("CC400", "Engenharia de Software", 60,
                 Set.of(AreaCompetencia.ENGENHARIA_DE_SOFTWARE));
 
+        List<Disciplina> disciplinas = new ArrayList<>(List.of(poo, bancoDeDados, redes, engenhariaSoftware));
+
         Professor ana = new Professor("Ana Silva", "P001",
                 Set.of(AreaCompetencia.PROGRAMACAO_AVANCADA, AreaCompetencia.ENGENHARIA_DE_SOFTWARE),
                 new HashSet<>(Set.of(segundaManha1, segundaManha2, tercaManha1)), 12);
@@ -38,7 +43,7 @@ public class Main {
                 Set.of(AreaCompetencia.REDES_DE_COMPUTADORES, AreaCompetencia.ENGENHARIA_DE_SOFTWARE),
                 new HashSet<>(Set.of(tercaManha1, tercaManha2)), 10);
 
-        List<Professor> professores = List.of(ana, bruno, carla);
+        List<Professor> professores = new ArrayList<>(List.of(ana, bruno, carla));
 
         DemandaPPC demandaPoo = new DemandaPPC(poo, segundaManha1, Prioridade.ALTA);
         DemandaPPC demandaBanco = new DemandaPPC(bancoDeDados, segundaManha3, Prioridade.MEDIA);
@@ -54,13 +59,9 @@ public class Main {
                 new InteresseAlunos(engenhariaSoftware, 30, Prioridade.MEDIA)
         );
 
-        Match match = new Match(professores, demandas, interesses, new PontuacaoPadraoStrategy());
-        match.executarMatch();
-
-        System.out.println();
-        System.out.println("=== GRADE GERADA ===");
-        for (Alocacao alocacao : match.getGradeCurricular().getAlocacoes()) {
-            System.out.println(alocacao);
-        }
+        SwingUtilities.invokeLater(() -> {
+            GradeGUI tela = new GradeGUI(professores, disciplinas, demandas, interesses);
+            tela.setVisible(true);
+        });
     }
 }

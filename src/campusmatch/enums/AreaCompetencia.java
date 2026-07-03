@@ -6,9 +6,7 @@ package campusmatch.enums;
  * essas mesmas tags para que o Motor de Match consiga cruzá-las.
  */
 public enum AreaCompetencia {
-    
-    // Lista de tags padronizadas. 
-    // Você pode adicionar quantas forem necessárias para os cursos da instituição.
+
     PROGRAMACAO_BASICA("Programação Básica e Lógica"),
     PROGRAMACAO_AVANCADA("Programação Avançada (Orientação a Objetos)"),
     BANCO_DE_DADOS("Banco de Dados e SQL"),
@@ -19,15 +17,13 @@ public enum AreaCompetencia {
     CALCULO("Cálculo e Matemática Avançada"),
     INTELIGENCIA_ARTIFICIAL("Inteligência Artificial e Machine Learning");
 
-    // Atributo opcional: Um nome "amigável" para mostrar na Interface Gráfica
+    // Nome amigável, usado na exibição em tela (Swing)
     private final String descricaoAmigavel;
 
-    // Construtor do Enum
     AreaCompetencia(String descricaoAmigavel) {
         this.descricaoAmigavel = descricaoAmigavel;
     }
 
-    // Getter para quando você for exibir essa tag na tela (JavaFX/Swing/Web)
     public String getDescricaoAmigavel() {
         return descricaoAmigavel;
     }
