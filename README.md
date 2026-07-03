@@ -1,4 +1,4 @@
-# Campus Match — Sistema de Apoio à Criação de Grades de Horário
+# Campus Match - Sistema de Apoio à Criação de Grades de Horário
 
 ## Sobre o Projeto
 Ferramenta desenvolvida em Java, com interface gráfica em Swing, para apoiar o *match* entre disciplinas, professores, demandas da coordenação (PPC) e interesses dos alunos. O sistema cruza competências e disponibilidade dos professores com as necessidades da coordenação e o interesse dos alunos, sugere uma alocação de horários e sinaliza conflitos de forma compreensível na própria tela.
@@ -30,6 +30,8 @@ cd Campus-match
 javac -d out $(find src -name "*.java")
 java -cp out campusmatch.Main
 ```
+
+Ao rodar, a aplicação já abre com dados de exemplo (3 professores, 4 disciplinas, 4 demandas do PPC e 4 registros de interesse dos alunos) carregados em memória.
 
 ## Como usar a interface
 1. **Aba "Professores"** — consulte os professores já cadastrados. No formulário abaixo da tabela, preencha nome, matrícula, carga horária, marque as competências e os horários disponíveis, e clique em **"Adicionar Professor"**.
